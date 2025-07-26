@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   motion,
   AnimatePresence,
@@ -64,6 +64,20 @@ const achievements: Achievement[] = [
 
 const Achievements: React.FC = () => {
   const [hovered, setHovered] = useState<string | null>(null);
+  useEffect(() => {
+    const move = (e: MouseEvent) => {
+      x.set(e.clientX + 50);
+      y.set(e.clientY - 20);
+    };
+
+    if (hovered) {
+      window.addEventListener("mousemove", move);
+    }
+
+    return () => {
+      window.removeEventListener("mousemove", move);
+    };
+  }, [hovered]);
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -130,17 +144,15 @@ const Achievements: React.FC = () => {
 
       <AnimatePresence>
         {hovered && (
-          <>
-            <motion.img
-              key={hovered}
-              src={hovered}
-              initial={{ opacity: 0, scale: 0.95, rotate: -4 }}
-              animate={{ opacity: 1, scale: 1, rotate: 0 }}
-              exit={{ opacity: 0, scale: 0.95, rotate: -4 }}
-              style={{ x: smoothX, y: smoothY }}
-              className="absolute  top-0 left-0 w-[300px] h-[300px] object-cover rounded-lg z-50 shadow-lg pointer-events-none"
-            />
-          </>
+          <motion.img
+            key={hovered}
+            src={hovered}
+            initial={{ opacity: 0, scale: 0.95, rotate: -4 }}
+            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+            exit={{ opacity: 0, scale: 0.95, rotate: -4 }}
+            style={{ x: smoothX, y: smoothY }}
+            className="absolute top-0 -left-[18%]  w-[300px] h-[300px] object-cover rounded-lg z-50 shadow-lg pointer-events-none"
+          />
         )}
       </AnimatePresence>
     </div>
