@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+html {
+    overflow-x: hidden !important;
+}
+
+@theme {
+    --font-made: "MADE Outer Sans", sans-serif;
+    --font-manrope: "Manrope", sans-serif;
+}
