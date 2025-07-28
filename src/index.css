@@ -9,6 +9,14 @@
   font-style: normal;
 }
 
+/* MADE Outer Sans Thin - fonts  */
+@font-face {
+  font-family: 'Made-Thin';
+  src: url('/fonts/made/Made-Thin.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* Blacksword -fonts  */
 @font-face {
   font-family: 'Blacksword';
@@ -20,6 +28,7 @@
 /* @Themes  */
 @theme {
   --font-made: "Made", "sans-serif";
+  --font-made-thin: "Made-Thin", "sans-serif";
   --font-blacksword: "Blacksword", "sans-serif";
   --font-manrope: "Manrope", "sans-serif";
 }
