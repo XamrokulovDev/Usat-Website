@@ -82,7 +82,7 @@ const Achievements: React.FC = () => {
           KUCHLI UNIVERSITET – <br />
           <span className="italic font-light">SEZILARLI g‘alabalar</span>
         </h2>
-        <p className="text-[16px]  w-[504px] text-justify font-manrope text-gray-600 mb-8 max-w-lg">
+        <p className="text-[16px] w-[504px] text-justify font-manrope text-gray-600 mb-8 max-w-lg">
           Biz erishgan natijalarimiz bilan faxrlanamiz: xalqaro tanlovlardagi
           ishtirokimiz, talabalar va o‘qituvchilarimizning g‘alabalari, ilmiy
           maqolalar, yuqori reytinglar. USAIT – bu o‘rgatuvchi, rivojlantirgan
@@ -138,7 +138,7 @@ const Achievements: React.FC = () => {
               animate={{ opacity: 1, scale: 1, rotate: 0 }}
               exit={{ opacity: 0, scale: 0.95, rotate: -4 }}
               style={{ x: smoothX, y: smoothY }}
-              className="absolute  top-0 left-0 w-[300px] h-[300px] object-cover rounded-lg z-50 shadow-lg pointer-events-none"
+              className="absolute top-0 left-0 w-[300px] h-[300px] object-cover rounded-lg z-50 shadow-lg pointer-events-none"
             />
           </>
         )}

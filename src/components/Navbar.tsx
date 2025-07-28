@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import globe from "../assets/globe.svg";
 import logo from "../assets/logo.svg";
 import menu from "../assets/menu.svg";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const [showLang, setShowLang] = useState(false);
@@ -59,7 +60,7 @@ const Navbar = () => {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className="w-full absolute top-0 left-0 z-50 py-[30px]"
       >
-        <div className="max-w-[1380px] mx-auto flex items-center justify-between px-[30px]">
+        <div className="max-w-[1380px] mx-auto flex items-center justify-between">
           {/* Globe icon */}
           <motion.div
             id="globe-icon"
@@ -77,7 +78,11 @@ const Navbar = () => {
               setShowMenu(false);
             }}
           >
-            <img src={globe} alt="globe icon" className="w-[24px] h-[24px]" />
+            <img 
+              src={globe} 
+              alt="globe icon" 
+              className="w-[24px] h-[24px]" 
+            />
           </motion.div>
           {/* Logo */}
           <motion.div
@@ -85,7 +90,13 @@ const Navbar = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4, delay: 0.3 }}
           >
-            <img src={logo} alt="logo image" className="w-[227px]" />
+            <NavLink to="/">
+              <img 
+                src={logo} 
+                alt="logo image" 
+                className="w-[227px]" 
+              />
+            </NavLink>
           </motion.div>
           {/* Menu icon */}
           <motion.div
@@ -128,23 +139,23 @@ const Navbar = () => {
               top: langPos.y + 10,
               left: langPos.x,
             }}
-            className="bg-white shadow-lg rounded-xl p-4 z-40 flex flex-col gap-2 w-[150px]"
+            className="bg-white shadow-lg rounded-xl z-40 flex flex-col gap-1 p-1"
           >
             <button
               onClick={() => handleLangSelect("uz")}
-              className="hover:bg-gray-100 px-4 py-2 text-left rounded"
+              className="hover:bg-gray-100 px-4 py-2 text-left rounded cursor-pointer"
             >
               🇺🇿 Uzb
             </button>
             <button
               onClick={() => handleLangSelect("ru")}
-              className="hover:bg-gray-100 px-4 py-2 text-left rounded"
+              className="hover:bg-gray-100 px-4 py-2 text-left rounded cursor-pointer"
             >
               🇷🇺 Rus
             </button>
             <button
               onClick={() => handleLangSelect("en")}
-              className="hover:bg-gray-100 px-4 py-2 text-left rounded"
+              className="hover:bg-gray-100 px-4 py-2 text-left rounded cursor-pointer"
             >
               🇬🇧 Eng
             </button>
@@ -165,23 +176,23 @@ const Navbar = () => {
               top: menuPos.y + 10,
               left: menuPos.x,
             }}
-            className="bg-white shadow-lg rounded-xl p-4 z-40 flex flex-col gap-2 w-[150px]"
+            className="bg-white shadow-lg rounded-xl z-40 flex flex-col gap-1 p-1"
           >
             <button
               onClick={() => handleMenuClick("home")}
-              className="hover:bg-gray-100 px-4 py-2 text-left rounded"
+              className="hover:bg-gray-100 px-4 py-2 text-left rounded cursor-pointer"
             >
               🏠 Home
             </button>
             <button
               onClick={() => handleMenuClick("about")}
-              className="hover:bg-gray-100 px-4 py-2 text-left rounded"
+              className="hover:bg-gray-100 px-4 py-2 text-left rounded cursor-pointer"
             >
               ℹ️ About
             </button>
             <button
               onClick={() => handleMenuClick("contact")}
-              className="hover:bg-gray-100 px-4 py-2 text-left rounded"
+              className="hover:bg-gray-100 px-4 py-2 text-left rounded cursor-pointer"
             >
               📞 Contact
             </button>
