@@ -12,7 +12,7 @@ const HeroSection = () => {
       >
         <h1
           title="Ariza topshirish"
-          className="text-[#000000] text-[16px] leading-[100%] font-made font-[400]"
+          className="text-[#000000] text-[16px] leading-[100%] font-made font-[300]"
         >
           Ariza topshirish
         </h1>
@@ -32,7 +32,7 @@ const HeroSection = () => {
       >
         <h1
           title="Batafsil ma’lumot olish"
-          className="text-[#000000] text-[16px] leading-[100%] font-made font-[400]"
+          className="text-[#000000] text-[16px] leading-[100%] font-made font-[300]"
         >
           Batafsil ma’lumot olish
         </h1>

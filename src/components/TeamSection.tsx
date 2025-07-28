@@ -81,10 +81,10 @@ const TeamSection: React.FC = () => {
       <div className="max-w-[1380px] mx-auto">
         {/* Header */}
         <div className="flex justify-between items-center mb-12">
-          <h2 className="text-3xl md:text-[40px] font-bold text-[#2B3767] leading-tight">
+          <h2 className="text-3xl md:text-[40px] font-[300] font-made text-[#2B3767] leading-tight">
             ILHOMLANTIRA OLADIGAN <br /> PROFESSIONALLAR
           </h2>
-          <p className="text-[#2B3767] w-[500px] text-[16px] text-justify">
+          <p className="text-[#2B3767] w-[500px] text-[16px] font-[400] text-justify font-manrope leading-[140%]">
             USAT jamoasi — bu akademik darajaga ega, xalqaro tajribaga va amaliy
             bilimlarga ega bo‘lgan o‘qituvchilar jamoasi. Ular talabalarimizga
             faqat kasbni emas, balki o‘z salohiyatini to‘liq ochish va
@@ -111,10 +111,10 @@ const TeamSection: React.FC = () => {
               <div className="py-10">
                 <div>
                   <div className="py-4">
-                    <h3 className="font-semibold text-[18px] text-[#2B3767] mb-1">
+                    <h3 className="font-[300] font-made leading-[100%] text-[18px] text-[#2B3767] mb-1">
                       {member.name}
                     </h3>
-                    <p className="text-[14px] text-[#888888]">
+                    <p className="text-[14px] text-[#888888] font-[400] font-manrope leading-[100%]">
                       {member.position}
                     </p>
                   </div>
