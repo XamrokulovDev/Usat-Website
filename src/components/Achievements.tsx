@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import {
   motion,
   AnimatePresence,
@@ -63,26 +63,24 @@ const achievements: Achievement[] = [
 ];
 
 const Achievements: React.FC = () => {
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const [hovered, setHovered] = useState<string | null>(null);
-  useEffect(() => {
-    const move = (e: MouseEvent) => {
-      x.set(e.clientX + 50);
-      y.set(e.clientY - 20);
-    };
-
-    if (hovered) {
-      window.addEventListener("mousemove", move);
-    }
-
-    return () => {
-      window.removeEventListener("mousemove", move);
-    };
-  }, [hovered]);
 
   const x = useMotionValue(0);
   const y = useMotionValue(0);
-  const smoothX = useSpring(x, { stiffness: 100, damping: 20 });
-  const smoothY = useSpring(y, { stiffness: 100, damping: 20 });
+  const smoothX = useSpring(x, { stiffness: 80, damping: 20 });
+  const smoothY = useSpring(y, { stiffness: 80, damping: 20 });
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!containerRef.current) return;
+    const bounds = containerRef.current.getBoundingClientRect();
+
+    const offsetX = e.clientX - bounds.left;
+    const offsetY = e.clientY - bounds.top;
+
+    x.set(offsetX + 20);
+    y.set(offsetY + 20);
+  };
 
   const grouped = achievements.reduce((acc, item) => {
     acc[item.year] = acc[item.year] ? [...acc[item.year], item] : [item];
@@ -92,11 +90,11 @@ const Achievements: React.FC = () => {
   return (
     <div className="relative p-6 md:p-12 max-w-[1380px] mx-auto font-sans">
       <div className="flex  items-center py-20">
-        <h2 className="text-[40px] w-[871px] font-[300] font-made leading-[110%] text-[#2B3767] mb-2">
-          KUCHLI UNIVERSITET – <br /> SEZILARLI
-          <span className="text-[40px] font-[400] leading-[110%] font-blacksword"> yutuqlar</span>
+        <h2 className="text-[40px] w-[871px] font-semibold text-[#2B3767] mb-2">
+          KUCHLI UNIVERSITET – <br />
+          <span className="italic font-light">SEZILARLI g‘alabalar</span>
         </h2>
-        <p className="text-[16px] w-[504px] text-justify font-manrope font-[400] text-[#2B3767] mb-8 max-w-lg">
+        <p className="text-[16px]  w-[504px] text-justify font-manrope text-gray-600 mb-8 max-w-lg">
           Biz erishgan natijalarimiz bilan faxrlanamiz: xalqaro tanlovlardagi
           ishtirokimiz, talabalar va o‘qituvchilarimizning g‘alabalari, ilmiy
           maqolalar, yuqori reytinglar. USAIT – bu o‘rgatuvchi, rivojlantirgan
@@ -122,13 +120,13 @@ const Achievements: React.FC = () => {
                     x.set(e.clientX + 20);
                     y.set(e.clientY + 20);
                   }}
-                  className="grid grid-cols-3 gap-4 items-start border-b border-gray-200 py-4 cursor-pointer"
+                  className="grid grid-cols-3 gap-4 items-start border-b border-gray-200 pb-4 cursor-pointer"
                 >
                   <div className="text-[16px] text-[#2B3767] font-manrope font-[400] leading-[160%]">{item.date}</div>
                   <div className="text-[#2B3767] text-[24px] font-made font-[300] leading-[120%]">
                     {item.title}
                   </div>
-                  <div className="text-[16px] text-[#2B3767] flex items-center justify-between font-manrope font-[400] leading-[160%] gap-1">
+                  <div className="text-[16px] text-[#2B3767] flex items-center justify-between gap-1 font-manrope ">
                     {item.location}
                     <img
                       src={icon}
@@ -144,21 +142,18 @@ const Achievements: React.FC = () => {
 
       <AnimatePresence>
         {hovered && (
-          <>
-            <motion.img
-              key={hovered}
-              src={hovered}
-              initial={{ opacity: 0, scale: 0.95, rotate: -4 }}
-              animate={{ opacity: 1, scale: 1, rotate: 0 }}
-              exit={{ opacity: 0, scale: 0.95, rotate: -4 }}
-              style={{ x: smoothX, y: smoothY }}
-              className="absolute  top-0 left-0 w-[300px] h-[300px] object-cover rounded-lg z-50 shadow-lg pointer-events-none"
-            />
-          </>
+          <motion.img
+            key={hovered}
+            src={hovered}
+            initial={{ opacity: 0, scale: 0.95, rotate: -4 }}
+            animate={{ opacity: 1, scale: 1, rotate: 0 }}
+            exit={{ opacity: 0, scale: 0.95, rotate: -4 }}
+            style={{ x: smoothX, y: smoothY }}
+            className="absolute top-0 -left-[18%]  w-[300px] h-[300px] object-cover rounded-lg z-50 shadow-lg pointer-events-none"
+          />
         )}
       </AnimatePresence>
     </div>
   );
 };
-
 export default Achievements;
