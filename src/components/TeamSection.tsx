@@ -100,8 +100,6 @@ const TeamSection: React.FC = () => {
             768: { slidesPerView: 3 },
             1024: { slidesPerView: 4 },
           }}
-          loop={true}
-          pagination={{ clickable: true }}
           scrollbar={{
             draggable: true,
           }}
@@ -131,6 +129,11 @@ const TeamSection: React.FC = () => {
               </div>
             </SwiperSlide>
           ))}
+          {/* <SwiperSlide>
+            <div className="py-10">
+                <h1>salom</h1>
+            </div>
+          </SwiperSlide> */}
         </Swiper>
       </div>
     </section>

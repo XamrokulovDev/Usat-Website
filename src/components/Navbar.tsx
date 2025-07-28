@@ -182,19 +182,19 @@ const Navbar = () => {
               onClick={() => handleMenuClick("home")}
               className="hover:bg-gray-100 px-4 py-2 text-left rounded cursor-pointer"
             >
-              🏠 Home
+              Home
             </button>
             <button
               onClick={() => handleMenuClick("about")}
               className="hover:bg-gray-100 px-4 py-2 text-left rounded cursor-pointer"
             >
-              ℹ️ About
+              About
             </button>
             <button
               onClick={() => handleMenuClick("contact")}
               className="hover:bg-gray-100 px-4 py-2 text-left rounded cursor-pointer"
             >
-              📞 Contact
+              Contact
             </button>
           </motion.div>
         )}
