@@ -6,6 +6,10 @@ import Header from "../components/Header";
 import Kafedra from "../components/Kafedra";
 import PartnerLogoSlider from "../components/PartnerLogoSlider";
 import StudentFeedback from "../components/StudentFeedback";
+
+import News from "../components/News";
+import PopularNews from "../components/PopularNews";
+
 import TeamSection from "../components/TeamSection";
 
 const Home = () => {
@@ -18,8 +22,12 @@ const Home = () => {
       <Achievements />
       <StudentFeedback />
       <Contact />
+
       <FAQ />
       <PartnerLogoSlider />
+
+      <PopularNews />
+      <News />
     </div>
   );
 };
