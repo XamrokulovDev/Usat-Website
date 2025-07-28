@@ -56,7 +56,7 @@ const About = () => {
           title="USAT haqida"
           className="text-[#2B3767] font-[300] leading-[105%] text-[24px] font-made"
         >
-          USAT haqida
+          USAT <span className="font-blacksword">haqida</span>
         </h3>
       </div>
       <div className="w-[100%] md:w-[65%] flex flex-col gap-[30px]">

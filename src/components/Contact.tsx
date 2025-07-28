@@ -7,7 +7,7 @@ const Contact = () => {
           <h1 className="text-[40px] font-made uppercase">
             Biz bilan bog‘laning
           </h1>
-          <p className="text-[20px] font-manrope">
+          <p className="text-[20px] font-manrope font-[400]">
             Bizga yozing — sizga imkon qadar tezroq javob beramiz
           </p>
         </div>
