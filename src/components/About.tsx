@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useAnimation, useInView } from "framer-motion";
 import MagneticButton from "../lib/MagneticButton";
+import ArrowRight from "../assets/about-arrow-click.svg";
 
 const Counter = ({ to }: { to: number }) => {
   const [count, setCount] = useState(0);
@@ -67,10 +68,28 @@ const About = () => {
           USAT – Fan va Texnologiyalar Universiteti: zamonaviy ta’lim yondashuvi
         </h1>
         <p className="text-[#2B3767] font-manrope font-[400] text-[16px] leading-[180%]">
-          USAT — bu Toshkentdagi innovatsion oliy ta’lim muassasasi bo‘lib, 18 ta bakalavriat va 6 ta magistratura yo‘nalishlarini taklif etadi. Bugungi kunda bu yerda 5000 dan ortiq talaba tahsil olmoqda, ularga 100 dan ziyod tajribali va xalqaro darajadagi o‘qituvchilar saboq berishmoqda. USAT xalqaro hamkorlikni faol rivojlantirib, kunduzgi, kechki, sirtqi va masofaviy o‘qish shakllarini taklif etadi. Bundan tashqari, grantlar, chegirmalar va ta’lim kreditlari ham mavjud.
+          USAT — bu Toshkentdagi innovatsion oliy ta’lim muassasasi bo‘lib, 18
+          ta bakalavriat va 6 ta magistratura yo‘nalishlarini taklif etadi.
+          Bugungi kunda bu yerda 5000 dan ortiq talaba tahsil olmoqda, ularga
+          100 dan ziyod tajribali va xalqaro darajadagi o‘qituvchilar saboq
+          berishmoqda. USAT xalqaro hamkorlikni faol rivojlantirib, kunduzgi,
+          kechki, sirtqi va masofaviy o‘qish shakllarini taklif etadi. Bundan
+          tashqari, grantlar, chegirmalar va ta’lim kreditlari ham mavjud.
         </p>
         {/* Magnetic button  */}
-        <MagneticButton />
+        <MagneticButton className="w-[241px] flex items-center justify-center gap-3 cursor-pointer group border border-[#2B3767] rounded-full px-[30px] py-[20px]">
+          <p className="text-[#2B3767] text-[16px] font-manrope font-[400] leading-[100%]">
+            Batafsil ma’lumot
+          </p>
+          <motion.img
+            src={ArrowRight}
+            alt="arrow right"
+            loading="lazy"
+            className="transition-transform duration-300"
+            whileHover={{ rotate: 90 }}
+            transition={{ type: "spring", stiffness: 200, damping: 15 }}
+          />
+        </MagneticButton>
         {/* Magnetic button  */}
         <div className="flex max-lg:flex-wrap items-center justify-between gap-[50px] mt-[50px]">
           <div className="w-full md:w-[30%] flex flex-col gap-[10px] border-t border-[#E1EAF8] pt-[30px]">

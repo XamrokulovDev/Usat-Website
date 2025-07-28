@@ -8,6 +8,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Autoplay } from "swiper/modules";
+import MagneticButton from "../lib/MagneticButton";
 
 const news = [
   {
@@ -56,10 +57,10 @@ const PopularNews = () => {
             yangiliklar bilan tanishing
           </p>
         </div>
-        <button className="w-[265px] h-[64px] bg-[#2B3767] text-[#FFFFFF] rounded-[100px] font-[300] font-made text-[16px] leading-[100%] flex items-center justify-center cursor-pointer gap-3">
+        <MagneticButton className="w-[265px] h-[64px] bg-[#2B3767] text-[#FFFFFF] rounded-[100px] font-[300] font-made text-[16px] leading-[100%] flex items-center justify-center cursor-pointer gap-3">
           Barcha Yangiliklar
           <img src={news_arrow} alt="news arrow click" loading="lazy" />
-        </button>
+        </MagneticButton>
       </div>
 
       <Swiper
@@ -104,14 +105,14 @@ const PopularNews = () => {
                 {item.title}
               </h1>
               <div className="flex justify-start">
-                <button className="cursor-pointer bg-[#F4C05B] px-[30px] py-[20px] flex items-center justify-center rounded-[100px] text-[#2B3767] font-[300] font-made leading-[100%] text-[16px] gap-3">
+                <MagneticButton className="cursor-pointer bg-[#F4C05B] px-[30px] py-[20px] flex items-center justify-center rounded-[100px] text-[#2B3767] font-[300] font-made leading-[100%] text-[16px] gap-3">
                   Batafsil ma’lumot
                   <img
                     src={arrow_right_light}
                     alt="arrow right light"
                     loading="lazy"
                   />
-                </button>
+                </MagneticButton>
               </div>
             </div>
           </SwiperSlide>
