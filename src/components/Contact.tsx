@@ -1,3 +1,5 @@
+import MagneticButton from "../lib/MagneticButton";
+
 const Contact = () => {
   return (
     <div className="py-[120px] bg-[#2B3767]">
@@ -48,12 +50,9 @@ const Contact = () => {
             />
           </div>
           <div className="flex justify-end px-[120px] pt-[40px]">
-            <button
-              type="submit"
-              className="w-[200px] h-[200px] bg-[#F4C05B] font-made text-[#2B3767] rounded-full text-[16px] p-[40px]"
-            >
+            <MagneticButton className="w-[200px] h-[200px] cursor-pointer bg-[#F4C05B] font-made text-[#2B3767] rounded-full text-[16px] p-[40px]">
               Yuborish
-            </button>
+            </MagneticButton>
           </div>
         </form>
       </div>

@@ -4,6 +4,7 @@ import kafedra from "../assets/kafedra.png";
 import hero from "../assets/hero.jpg";
 import swiper_arrow from "../assets/swiper-arrow-click.svg";
 import kafedra_arrow from "../assets/kafedra-arrow-click.svg";
+import MagneticButton from "../lib/MagneticButton";
 
 const Kafedras = [
   {
@@ -115,14 +116,14 @@ const Kafedra = () => {
                 <h1 className="w-1/2 font-[300] font-made text-[48px] leading-[110%] text-[#FFFFFF] uppercase">
                   {item.description}
                 </h1>
-                <button className="w-[196px] h-[64px] bg-[#EFEFEF] rounded-[100px] text-[#2B3767] font-[300] font-made px-[32px] py-[20px] flex items-center mt-8 gap-3">
+                <MagneticButton className="w-[196px] h-[64px] cursor-pointer bg-[#EFEFEF] rounded-[100px] text-[#2B3767] font-[300] font-made px-[32px] py-[20px] flex items-center mt-8 gap-3">
                   Fakultetlar
                   <img
                     src={kafedra_arrow}
                     alt="kafedra arrow click"
                     loading="lazy"
                   />
-                </button>
+                </MagneticButton>
               </motion.div>
             </AnimatePresence>
           </div>
