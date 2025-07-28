@@ -96,7 +96,7 @@ const Achievements: React.FC = () => {
           KUCHLI UNIVERSITET – <br />
           <span className="italic font-light">SEZILARLI g‘alabalar</span>
         </h2>
-        <p className="text-[16px] w-[504px] text-justify font-manrope text-gray-600 mb-8 max-w-lg">
+        <p className="text-[16px] w-[504px] text-justify font-manropefont-[400] text-gray-600 mb-8 max-w-lg">
           Biz erishgan natijalarimiz bilan faxrlanamiz: xalqaro tanlovlardagi
           ishtirokimiz, talabalar va o‘qituvchilarimizning g‘alabalari, ilmiy
           maqolalar, yuqori reytinglar. USAIT – bu o‘rgatuvchi, rivojlantirgan
@@ -128,7 +128,7 @@ const Achievements: React.FC = () => {
                   <div className="text-blue-900 text-[24px] font-medium">
                     {item.title}
                   </div>
-                  <div className="text-[16px] text-[#2B3767] flex items-center justify-between gap-1 font-manrope ">
+                  <div className="text-[16px] text-[#2B3767] flex items-center justify-between gap-1 font-manrope font-[400]">
                     {item.location}
                     <img
                       src={icon}
