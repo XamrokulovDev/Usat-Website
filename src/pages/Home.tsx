@@ -3,6 +3,7 @@ import Achievements from "../components/Achievements";
 import Contact from "../components/Contact";
 import Header from "../components/Header";
 import Kafedra from "../components/Kafedra";
+import StudentFeedback from "../components/StudentFeedback";
 import TeamSection from "../components/TeamSection";
 
 const Home = () => {
@@ -13,6 +14,7 @@ const Home = () => {
       <Kafedra />
       <TeamSection />
       <Achievements />
+      <StudentFeedback />
       <Contact />
     </div>
   );
