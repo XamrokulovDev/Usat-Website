@@ -1,34 +1,60 @@
 const Contact = () => {
   return (
     <div className="py-[120px] bg-[#2B3767]">
-      <div className="max-w-[1380px] mx-auto flex justify-between ">
-        <div className="text-[#fff]">
-          <h1 className="text-[24px]">SAVOLLARINGIZ qoldimi?</h1>
-          <h1 className="text-[40px] font-made uppercase">
-            Biz bilan bog‘laning
-          </h1>
-          <p className="text-[20px] font-manrope font-[400]">
-            Bizga yozing — sizga imkon qadar tezroq javob beramiz
-          </p>
-        </div>
-        <form action="#" className="flex flex-col w-[600px] gap-[10px]">
-          <input
-            type="text"
-            placeholder="Ismingiz"
-            className="w-full border border-[#3F57B6] rounded-[15px] text-[20px] text-[#fff] px-[25px] py-[20px] bg-transparent outline-none"
-          />
-          <input
-            type="text"
-            placeholder="Ismingiz"
-            className="w-full border border-[#3F57B6] rounded-[15px] text-[20px] text-[#fff] px-[25px] py-[20px] bg-transparent outline-none"
-          />
-          <textarea
-            placeholder="Ismingiz"
-            className="w-full h-[200px] border border-[#3F57B6] rounded-[15px] text-[20px] text-[#fff] px-[25px] py-[20px] bg-transparent outline-none"
-          />
-          <button className="w-full border bg-[#F4C05B] rounded-[15px] text-[20px] px-[25px] py-[20px] text-[#2B3767] cursor-pointer">
-            Yuborish
-          </button>
+      <div className="max-w-[1380px] mx-auto text-[#fff] text-[24px] ">
+        <h1 className="font-blacksword mb-[40px]">Savollaringiz qoldimi?</h1>
+        <h1 className="uppercase font-made text-[56px]">SAlom, bu meni</h1>
+        <form action="#" className="flex flex-col gap-[20px]">
+          <div className="pl-[80px] w-full flex items-center gap-[10px]">
+            <label htmlFor="name" className="text-[56px] uppercase font-made">
+              ismim
+            </label>
+            <input
+              type="text"
+              className="border-b w-full text-center text-[20px] p-[25px] h-[74px]  bg-transparent outline-none"
+              id="name"
+              name="name"
+              placeholder="Bu yerga o’zingizni ismingizni kiriting"
+            />
+          </div>
+          <div className="w-full flex items-center ">
+            <label
+              htmlFor="name"
+              className="text-[56px] w-[47%] uppercase font-made"
+            >
+              telefon raqamim
+            </label>
+            <input
+              type="text"
+              className="border-b w-[54%] text-center text-[20px] p-[25px] h-[74px]  bg-transparent outline-none"
+              id="name"
+              name="name"
+              placeholder="Bu yerga o’zingizni telefon raqamingizni kiriting"
+            />
+          </div>
+          <div className="w-full flex items-center ">
+            <label
+              htmlFor="name"
+              className="text-[56px] w-[40%] uppercase font-made"
+            >
+              savolim
+            </label>
+            <input
+              type="text"
+              className="border-b w-[70%] text-center text-[20px] p-[25px] h-[74px]  bg-transparent outline-none"
+              id="name"
+              name="name"
+              placeholder="Bu yerga o’zingizni savolingizni kiriting"
+            />
+          </div>
+          <div className="flex justify-end px-[120px] pt-[40px]">
+            <button
+              type="submit"
+              className="w-[200px] h-[200px] bg-[#F4C05B] font-made text-[#2B3767] rounded-full text-[16px] p-[40px]"
+            >
+              Yuborish
+            </button>
+          </div>
         </form>
       </div>
     </div>
