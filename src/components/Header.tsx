@@ -24,7 +24,7 @@ const Header = () => {
   };
 
   return (
-    <div className="w-screen h-[850px] bg-[#000000]/50 relative overflow-hidden">
+    <div className="w-screen h-[850px] bg-[#000000]/40 relative overflow-hidden">
       <motion.img
         src={hero}
         alt="hero section"

@@ -10,6 +10,7 @@ import News from "../components/News";
 import PopularNews from "../components/PopularNews";
 import TeamSection from "../components/TeamSection";
 import { useState } from "react";
+import ArcSection from "../components/ArcSection";
 
 const Home = () => {
   const [currentNewsIds, setCurrentNewsIds] = useState<number[]>([]);
@@ -18,6 +19,7 @@ const Home = () => {
       <Header />
       <About />
       <Kafedra />
+      <ArcSection />
       <TeamSection />
       <Achievements />
       <StudentFeedback />
