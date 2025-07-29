@@ -11,6 +11,7 @@ import News from "../components/News";
 import PopularNews from "../components/PopularNews";
 
 import TeamSection from "../components/TeamSection";
+import ArcSection from "../components/ArcSection";
 
 const Home = () => {
   return (
@@ -18,6 +19,7 @@ const Home = () => {
       <Header />
       <About />
       <Kafedra />
+      <ArcSection />
       <TeamSection />
       <Achievements />
       <StudentFeedback />

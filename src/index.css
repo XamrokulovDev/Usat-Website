@@ -1,26 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
 @import "tailwindcss";
 
 /* MADE Outer Sans - fonts  */
 @font-face {
-  font-family: 'Made';
-  src: url('/fonts/made/Made.otf') format('opentype');
+  font-family: "Made";
+  src: url("/fonts/made/Made.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
 
 /* MADE Outer Sans Thin - fonts  */
 @font-face {
-  font-family: 'Made-Thin';
-  src: url('/fonts/made/Made-Thin.otf') format('opentype');
+  font-family: "Made-Thin";
+  src: url("/fonts/made/Made-Thin.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
 
 /* Blacksword -fonts  */
 @font-face {
-  font-family: 'Blacksword';
-  src: url('/fonts/blackword/Blacksword.otf') format('opentype');
+  font-family: "Blacksword";
+  src: url("/fonts/blackword/Blacksword.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
