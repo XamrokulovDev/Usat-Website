@@ -9,8 +9,10 @@ import StudentFeedback from "../components/StudentFeedback";
 import News from "../components/News";
 import PopularNews from "../components/PopularNews";
 import TeamSection from "../components/TeamSection";
+import { useState } from "react";
 
 const Home = () => {
+  const [currentNewsIds, setCurrentNewsIds] = useState<number[]>([]);
   return (
     <div>
       <Header />
@@ -21,8 +23,8 @@ const Home = () => {
       <StudentFeedback />
       <Contact />
       <FAQ />
-      <PopularNews />
-      <News />
+      <PopularNews onVisibleNewsChange={setCurrentNewsIds} />
+      <News hiddenIds={currentNewsIds} />
       <PartnerLogoSlider />
     </div>
   );
