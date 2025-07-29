@@ -1,54 +1,220 @@
-import { motion } from "framer-motion";
-import { useRef } from "react";
+import { useState, useEffect } from "react";
+
+export const universityFacts = [
+  {
+    id: 1,
+    name: "Xalqaro Hamkorlik",
+    desc: "Universitet dunyoning 20 dan ortiq mamlakatlari bilan akademik hamkorlikni yo‘lga qo‘ygan.",
+  },
+  {
+    id: 2,
+    name: "Ikki Diplom",
+    desc: "Talabalar bir vaqtning o‘zida ikki davlat diplomi bilan bitirish imkoniyatiga ega.",
+  },
+  {
+    id: 3,
+    name: "Ilmiy Loyihalar",
+    desc: "Har yili yuzlab talabalar ilmiy grant va startap loyihalarda ishtirok etishadi.",
+  },
+  {
+    id: 4,
+    name: "Stajirovkalar",
+    desc: "Talabalar nufuzli xorijiy kompaniyalarda amaliyot o‘tash imkoniyatiga ega.",
+  },
+  {
+    id: 5,
+    name: "Innovatsion Yondashuv",
+    desc: "Darslar zamonaviy texnologiyalar va interaktiv metodikalar orqali o‘qitiladi.",
+  },
+  {
+    id: 6,
+    name: "Xalqaro Talabalar",
+    desc: "30 ga yaqin davlatdan talabalar tahsil olayotgani – xalqaro muhit yaratadi.",
+  },
+  {
+    id: 7,
+    name: "Professor-o‘qituvchilar",
+    desc: "O‘zbekiston va xorijdan jalb qilingan tajribali ustozlar dars beradi.",
+  },
+  {
+    id: 8,
+    name: "Kampus Sharoitlari",
+    desc: "Kutubxona, sport zallari, kovorking va Wi-Fi bilan to‘liq jihozlangan zamonaviy kampus.",
+  },
+  {
+    id: 9,
+    name: "Ingliz Tili Muhiti",
+    desc: "Ko‘plab fanlar ingliz tilida olib boriladi va tilni chuqur o‘rganishga imkon beradi.",
+  },
+  {
+    id: 10,
+    name: "Karera Markazi",
+    desc: "Bitiruvchilarni ishga joylashtirish va startaplarni rivojlantirish uchun maxsus markaz faoliyat yuritadi.",
+  },
+  {
+    id: 11,
+    name: "Erkin Fikr va Tanqidiy Tahlil",
+    desc: "Har bir talaba mustaqil fikrlashga, bahslashishga va yangilik yaratishga undaladi.",
+  },
+  {
+    id: 12,
+    name: "Talaba Hayoti",
+    desc: "Klublar, festivallar, tanlovlar va seminarlar bilan boy talaba hayoti.",
+  },
+];
 
 const ArcSection = () => {
-  const ref = useRef(null);
-  //   const { scrollYProgress } = useScroll({
-  //     target: ref,
-  //     offset: ["start end", "end start"], // Scroll boshidan oxirigacha
-  //   });
+  const centerX = 690;
+  const centerY = 690;
+  const radius = 600;
 
-  // Rotate scrollga bog‘liq
-  //   const rotate = useTransform(scrollYProgress, [0, 1], [0, 180]);
-  //   const [rotation, setRotation] = useState(0);
+  const [rotation, setRotation] = useState(0);
+  const [activeId, setActiveId] = useState(1); // Default = pastki
 
-  //   const handleRotate = () => {
-  //     setRotation((prev) => prev + 45); // 45 gradusga aylantir
-  //   };
+  const points = [
+    { id: 1, angle: 0 },
+    { id: 2, angle: 30 },
+    { id: 3, angle: 60 },
+    { id: 4, angle: 90 },
+    { id: 5, angle: 120 },
+    { id: 6, angle: 150 },
+    { id: 7, angle: 180 },
+    { id: 8, angle: 210 },
+    { id: 9, angle: 240 },
+    { id: 10, angle: 270 },
+    { id: 11, angle: 300 },
+    { id: 12, angle: 330 },
+  ];
+
+  const getPosition = (angle: number, r = radius) => {
+    const adjustedAngle = angle + rotation;
+    const radian = (adjustedAngle * Math.PI) / 180;
+    const x = centerX + r * Math.cos(radian);
+    const y = centerY + r * Math.sin(radian);
+    return { x, y };
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const newRotation = scrollY * 0.3;
+      setRotation(newRotation);
+
+      // ✅ ScrollY asosida real vaqtli rotation bilan pozitsiyalar
+      const top = points
+        .map((point) => {
+          const angle = point.angle + newRotation;
+          const rad = (angle * Math.PI) / 180;
+          const y = centerY + radius * Math.sin(rad);
+          return { id: point.id, y };
+        })
+        .sort((a, b) => a.y - b.y)[0]; // eng tepada (eng kichik y)
+
+      setActiveId(top.id);
+    };
+
+    handleScroll(); // Initial holatda
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+  // const handleManualRotation = (delta: number) => {
+  //   const newRotation = rotation + delta;
+  //   setRotation(newRotation);
+
+  //   const top = points
+  //     .map((point) => {
+  //       const angle = point.angle + newRotation;
+  //       const rad = (angle * Math.PI) / 180;
+  //       const y = centerY + radius * Math.sin(rad);
+  //       return { id: point.id, y };
+  //     })
+  //     .sort((a, b) => a.y - b.y)[0];
+
+  //   setActiveId(top.id);
+  // };
+  const activeFact = universityFacts.find((fact) => fact.id === activeId);
+
   return (
-    <section
-      ref={ref}
-      className="h-[100vh]  flex flex-col font-made items-center justify-center bg-white overflow-hidden"
-    >
-      <motion.h2
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="text-center text-[#1C2C5B] text-[48px] my-40 mb-10 uppercase"
-      >
-        USAT – bu shunchaki <br /> universitet emas
-      </motion.h2>
+    <div className="max-w-[1480px] h-[800px] mx-auto overflow-hidden  relative">
+      <div className="arcSection h-[200px] w-full absolute bottom-0 z-10"></div>
+      <h1 className="text-[48px] text-[#2B3767] text-center font-made mt-[120px] mb-[100px] uppercase">
+        USAT — bu shunchaki <br /> universitet emas
+      </h1>
+      {/* <div className="flex justify-center items-center gap-6 mt-10">
+        <button
+          onClick={() => handleManualRotation(-30)}
+          className="bg-yellow-300 hover:bg-yellow-400 text-[#2B3767] px-5 py-2 rounded font-semibold shadow"
+        >
+          ◀️ Oldingi
+        </button>
+        <button
+          onClick={() => handleManualRotation(30)}
+          className="bg-yellow-300 hover:bg-yellow-400 text-[#2B3767] px-5 py-2 rounded font-semibold shadow"
+        >
+          Keyingi ▶️
+        </button>
+      </div> */}
+      <div className="w-full flex items-center justify-center">
+        <div className="relative  w-[1380px] h-[1380px] flex items-center justify-center ">
+          <svg width="1380" height="1380" className="absolute inset-0">
+            <circle
+              cx={centerX}
+              cy={centerY}
+              r={radius}
+              fill="none"
+              stroke="rgb(253 224 71)"
+              strokeWidth="3"
+            />
+            {points.map((point) => {
+              const pos = getPosition(point.angle);
+              return (
+                <line
+                  key={`line-${point.id}`}
+                  x1={centerX}
+                  y1={centerY}
+                  x2={pos.x}
+                  y2={pos.y}
+                  strokeWidth="3"
+                />
+              );
+            })}
+          </svg>
 
-      <div className="w-[1380px] mx-auto relative">
-        <div className="relative w-full h-[60px] mt-10">
-          {/* Uzun chiziq */}
-          <div className="absolute top-1/2 left-0 w-full h-[2px] bg-black -translate-y-1/2 "></div>
+          {points.map((point) => {
+            const pos = getPosition(point.angle);
+            const labelPos = getPosition(point.angle, radius + 80);
 
-          {/* 12 ta kvadrat + doira */}
-          <div className="absolute top-0 left-0 w-full flex justify-between">
-            {Array.from({ length: 12 }).map((_, idx) => (
-              <div key={idx} className="relative">
-                {/* Yuqoridagi doira */}
-                <div className="absolute bottom-[50%] left-1/2 -translate-x-1/2 w-[60px] h-[60px] rounded-full border border-[#F4C05B] flex items-center justify-center text-sm bg-white">
-                  {idx + 1}
-                  <span className="w-[20px] h-[20px] bg-red-400 absolute bottom-[-40px] left-1/2 -translate-x-1/2 rounded-full"> </span>
+            return (
+              <div key={point.id}>
+                <div
+                  className="absolute w-4 h-4 bg-yellow-300 rounded-full transform -translate-x-1/2 -translate-y-1/2"
+                  style={{ left: pos.x, top: pos.y }}
+                />
+
+                <div
+                  className="absolute w-[80px] h-[80px] bg-white rounded-full border-2 border-[#F4C05B] flex items-center justify-center text-blue-900 font-medium text-[24px] shadow-lg transform -translate-x-1/2 -translate-y-1/2"
+                  style={{ left: labelPos.x, top: labelPos.y }}
+                >
+                  {point.id}
                 </div>
               </div>
-            ))}
-          </div>
+            );
+          })}
+
+          {/* 🟡 Markazdagi text — faqat activeId asosida chiqadi */}
+          {activeFact && (
+            <div className="w-[800px] z-20 absolute top-70 flex justify-center flex-col items-center">
+              <h1 className="text-[40px] text-[#2B3767] text-center font-made uppercase">
+                {activeFact.name}
+              </h1>
+              <p className="text-[20px] text-[#2B3767] text-center font-medium">
+                {activeFact.desc}
+              </p>
+            </div>
+          )}
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

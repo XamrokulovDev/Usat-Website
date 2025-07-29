@@ -9,7 +9,7 @@ const HeroSection = () => {
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 0.2 }}
-      className="relative w-[338px] h-[200px] rounded-md overflow-hidden cursor-pointer group"
+      className="relative w-[338px] h-[200px] rounded-md border border-white border-opacity-10 shadow-2xl shadow-amber-100 overflow-hidden cursor-pointer group"
     >
       {/* Rasm */}
       <img
