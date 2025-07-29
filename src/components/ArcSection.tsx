@@ -104,7 +104,7 @@ const ArcSection = () => {
       },
       {
         root: null, // viewport
-        threshold: 0.2, // kamida 20% component ko‘rinsa, true
+        threshold: 0.3, // kamida 20% component ko‘rinsa, true
       }
     );
 
@@ -121,7 +121,7 @@ const ArcSection = () => {
       if (!isInView) return;
 
       const scrollY = window.scrollY;
-      const newRotation = scrollY * 0.3;
+      const newRotation = scrollY * 0.5;
 
       // 💡 Faqat activeId ni real vaqt rotation bilan hisoblaymiz
       const top = points
@@ -147,7 +147,7 @@ const ArcSection = () => {
       className="max-w-[1480px] h-[800px] mx-auto overflow-hidden  relative"
       ref={arcRef}
     >
-      <div className="arcSection h-[200px] w-full absolute bottom-0 z-10"></div>
+      <div className="arcSection h-[300px] w-full absolute bottom-0 z-10"></div>
       <div className="mt-[120px] mb-[100px]">
         <h1 className="text-[48px] text-[#2B3767] text-center font-made  uppercase">
           USAT — bu shunchaki <br /> universitet emas
@@ -209,14 +209,26 @@ const ArcSection = () => {
                 initial={{ opacity: 0, x: -100 }}
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 100 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.4 }}
               >
-                <h1 className="text-[40px] text-[#2B3767] text-center font-made uppercase">
+                <motion.h1
+                  className="text-[40px] text-[#2B3767] text-center font-made uppercase"
+                  initial={{ opacity: 0, x: -100 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 100 }}
+                  transition={{ duration: 0.4 }}
+                >
                   {activeFact.name}
-                </h1>
-                <p className="text-[20px] text-[#2B3767] text-center font-medium">
+                </motion.h1>
+                <motion.p
+                  className="text-[20px] text-[#2B3767] text-center font-medium"
+                  initial={{ opacity: 0, x: -100 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: 100 }}
+                  transition={{ duration: 0.2 }}
+                >
                   {activeFact.desc}
-                </p>
+                </motion.p>
               </motion.div>
             )}
           </AnimatePresence>
