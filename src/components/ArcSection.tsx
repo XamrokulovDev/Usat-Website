@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
 
 export const universityFacts = [
   {
@@ -70,6 +71,8 @@ const ArcSection = () => {
 
   const [rotation, setRotation] = useState(0);
   const [activeId, setActiveId] = useState(1); // Default = pastki
+  const arcRef = useRef<HTMLDivElement>(null);
+  const [isInView, setIsInView] = useState(false);
 
   const points = [
     { id: 1, angle: 0 },
@@ -95,12 +98,32 @@ const ArcSection = () => {
   };
 
   useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      {
+        root: null, // viewport
+        threshold: 0.2, // kamida 20% component ko‘rinsa, true
+      }
+    );
+
+    if (arcRef.current) {
+      observer.observe(arcRef.current);
+    }
+
+    return () => {
+      if (arcRef.current) observer.unobserve(arcRef.current);
+    };
+  }, []);
+  useEffect(() => {
     const handleScroll = () => {
+      if (!isInView) return;
+
       const scrollY = window.scrollY;
       const newRotation = scrollY * 0.3;
-      setRotation(newRotation);
 
-      // ✅ ScrollY asosida real vaqtli rotation bilan pozitsiyalar
+      // 💡 Faqat activeId ni real vaqt rotation bilan hisoblaymiz
       const top = points
         .map((point) => {
           const angle = point.angle + newRotation;
@@ -108,52 +131,28 @@ const ArcSection = () => {
           const y = centerY + radius * Math.sin(rad);
           return { id: point.id, y };
         })
-        .sort((a, b) => a.y - b.y)[0]; // eng tepada (eng kichik y)
+        .sort((a, b) => a.y - b.y)[0];
 
       setActiveId(top.id);
+      setRotation(newRotation); // Bu faqat `getPosition` uchun kerak
     };
 
-    handleScroll(); // Initial holatda
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-  // const handleManualRotation = (delta: number) => {
-  //   const newRotation = rotation + delta;
-  //   setRotation(newRotation);
-
-  //   const top = points
-  //     .map((point) => {
-  //       const angle = point.angle + newRotation;
-  //       const rad = (angle * Math.PI) / 180;
-  //       const y = centerY + radius * Math.sin(rad);
-  //       return { id: point.id, y };
-  //     })
-  //     .sort((a, b) => a.y - b.y)[0];
-
-  //   setActiveId(top.id);
-  // };
+  }, [isInView]);
   const activeFact = universityFacts.find((fact) => fact.id === activeId);
 
   return (
-    <div className="max-w-[1480px] h-[800px] mx-auto overflow-hidden  relative">
+    <div
+      className="max-w-[1480px] h-[800px] mx-auto overflow-hidden  relative"
+      ref={arcRef}
+    >
       <div className="arcSection h-[200px] w-full absolute bottom-0 z-10"></div>
-      <h1 className="text-[48px] text-[#2B3767] text-center font-made mt-[120px] mb-[100px] uppercase">
-        USAT — bu shunchaki <br /> universitet emas
-      </h1>
-      {/* <div className="flex justify-center items-center gap-6 mt-10">
-        <button
-          onClick={() => handleManualRotation(-30)}
-          className="bg-yellow-300 hover:bg-yellow-400 text-[#2B3767] px-5 py-2 rounded font-semibold shadow"
-        >
-          ◀️ Oldingi
-        </button>
-        <button
-          onClick={() => handleManualRotation(30)}
-          className="bg-yellow-300 hover:bg-yellow-400 text-[#2B3767] px-5 py-2 rounded font-semibold shadow"
-        >
-          Keyingi ▶️
-        </button>
-      </div> */}
+      <div className="mt-[120px] mb-[100px]">
+        <h1 className="text-[48px] text-[#2B3767] text-center font-made  uppercase">
+          USAT — bu shunchaki <br /> universitet emas
+        </h1>
+      </div>
       <div className="w-full flex items-center justify-center">
         <div className="relative  w-[1380px] h-[1380px] flex items-center justify-center ">
           <svg width="1380" height="1380" className="absolute inset-0">
@@ -202,16 +201,25 @@ const ArcSection = () => {
           })}
 
           {/* 🟡 Markazdagi text — faqat activeId asosida chiqadi */}
-          {activeFact && (
-            <div className="w-[800px] z-20 absolute top-70 flex justify-center flex-col items-center">
-              <h1 className="text-[40px] text-[#2B3767] text-center font-made uppercase">
-                {activeFact.name}
-              </h1>
-              <p className="text-[20px] text-[#2B3767] text-center font-medium">
-                {activeFact.desc}
-              </p>
-            </div>
-          )}
+          <AnimatePresence mode="wait">
+            {activeFact && (
+              <motion.div
+                key={activeFact.id} // <- albatta unique bo‘lishi kerak
+                className="w-[800px] z-20 absolute top-70 flex justify-center flex-col items-center"
+                initial={{ opacity: 0, x: -100 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 100 }}
+                transition={{ duration: 0.5 }}
+              >
+                <h1 className="text-[40px] text-[#2B3767] text-center font-made uppercase">
+                  {activeFact.name}
+                </h1>
+                <p className="text-[20px] text-[#2B3767] text-center font-medium">
+                  {activeFact.desc}
+                </p>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </div>

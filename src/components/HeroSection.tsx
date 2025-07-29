@@ -3,13 +3,14 @@ import vector from "../assets/image 2778.svg";
 import vector1 from "../assets/image 2780.svg";
 import iconright from "../assets/icons/Arrow_right_light.svg";
 
+
 const HeroSection = () => {
   const Card = ({ img, title }: { img: string; title: string }) => (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 0.2 }}
-      className="relative w-[338px] h-[200px] rounded-md border border-white border-opacity-10 shadow-2xl shadow-amber-100 overflow-hidden cursor-pointer group"
+      className="relative w-[338px] h-[200px]  border-[5px] border-white border-opacity-10 shadow-2xl shadow-white/10 z-100 overflow-hidden cursor-pointer group"
     >
       {/* Rasm */}
       <img
@@ -39,7 +40,6 @@ const HeroSection = () => {
       </div>
     </motion.div>
   );
-
   return (
     <div className="flex items-center gap-3">
       <Card img={vector} title="Xalqaro talabalar uchun qabul" />
