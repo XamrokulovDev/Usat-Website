@@ -55,6 +55,7 @@ const News = () => {
           },
         }}
         modules={[Autoplay]}
+        className="cursor-ew-resize"
       >
         {news.map((item) => (
           <SwiperSlide key={item.id}>
@@ -79,6 +80,14 @@ const News = () => {
                   loading="lazy"
                 />
               </button>
+              {/* <MagneticButton className="w-[241px] h-[64px] bg-[#F2F5FC] flex items-center justify-center gap-3 rounded-[100px] text-[#2B3767] font-[300] font-made text-[16px] leading-[100%] cursor-pointer">
+                Batafsil ma’lumot
+                <img
+                  src={expand_right_light}
+                  alt="expand right light"
+                  loading="lazy"
+                />
+              </MagneticButton> */}
             </div>
           </SwiperSlide>
         ))}

@@ -80,7 +80,7 @@ const PopularNews = () => {
           },
         }}
         modules={[Autoplay]}
-        className="max-w-[1380px] mx-auto mt-12"
+        className="max-w-[1380px] mx-auto cursor-ew-resize mt-12"
       >
         {news.map((item) => (
           <SwiperSlide key={item.id}>
