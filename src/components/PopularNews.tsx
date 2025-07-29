@@ -136,7 +136,7 @@ const PopularNews = ({
                 <h4 className="text-[#BDBDBD] text-[16px] uppercase">{item.type}</h4>
               </div>
               <h1 className="text-[#2B3767] text-[28px] font-[300] font-made line-clamp-2 leading-[120%]">
-                {item.id}. {item.title}
+                {item.title}
               </h1>
               <div>
                 <MagneticButton className="bg-[#F4C05B] px-[30px] py-[20px] rounded-[100px] text-[#2B3767] text-[16px] font-[300] flex items-center gap-3">

@@ -102,7 +102,7 @@ const News = ({ hiddenIds }: { hiddenIds: number[] }) => {
             <div className="h-[216px] flex flex-col justify-between border-t border-[#DCDCDC] pt-[30px] gap-[20px]">
               <h3 className="text-[#BDBDBD] text-[16px] uppercase">{item.date}</h3>
               <h1 className="text-[#2B3767] text-[24px] font-[300] font-made uppercase line-clamp-2">
-                {item.id}. {item.title}
+                {item.title}
               </h1>
               <button className="w-[241px] h-[64px] bg-[#F2F5FC] rounded-[100px] text-[#2B3767] text-[16px] font-[300] flex items-center justify-center gap-3">
                 Batafsil ma’lumot
