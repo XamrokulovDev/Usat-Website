@@ -11,6 +11,7 @@ import PopularNews from "../components/PopularNews";
 import TeamSection from "../components/TeamSection";
 import { useState } from "react";
 import ArcSection from "../components/ArcSection";
+import Tunnel from "../components/Tunnel";
 
 const Home = () => {
   const [currentNewsIds, setCurrentNewsIds] = useState<number[]>([]);
@@ -23,6 +24,7 @@ const Home = () => {
       <TeamSection />
       <Achievements />
       <StudentFeedback />
+      <Tunnel />
       <Contact />
       <FAQ />
       <PopularNews onVisibleNewsChange={setCurrentNewsIds} />

@@ -44,3 +44,11 @@ html {
     rgb(255, 255, 255)
   );
 }
+
+.tunnel-perspective {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}

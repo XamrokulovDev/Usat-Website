@@ -69,24 +69,19 @@ const ArcSection = () => {
   const centerY = 690;
   const radius = 600;
 
-  const [rotation, setRotation] = useState(0);
+  const [rotation, setRotation] = useState(-360);
   const [activeId, setActiveId] = useState(1); // Default = pastki
   const arcRef = useRef<HTMLDivElement>(null);
   const [isInView, setIsInView] = useState(false);
 
   const points = [
-    { id: 1, angle: 0 },
-    { id: 2, angle: 30 },
-    { id: 3, angle: 60 },
-    { id: 4, angle: 90 },
-    { id: 5, angle: 120 },
-    { id: 6, angle: 150 },
-    { id: 7, angle: 180 },
-    { id: 8, angle: 210 },
-    { id: 9, angle: 240 },
-    { id: 10, angle: 270 },
-    { id: 11, angle: 300 },
-    { id: 12, angle: 330 },
+    { id: 7, angle: 90 },
+    { id: 6, angle: 120 },
+    { id: 5, angle: 150 },
+    { id: 4, angle: 180 },
+    { id: 3, angle: 210 },
+    { id: 2, angle: 240 },
+    { id: 1, angle: 270 },
   ];
 
   const getPosition = (angle: number, r = radius) => {
@@ -96,7 +91,6 @@ const ArcSection = () => {
     const y = centerY + r * Math.sin(radian);
     return { x, y };
   };
-
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -104,7 +98,7 @@ const ArcSection = () => {
       },
       {
         root: null, // viewport
-        threshold: 0.3, // kamida 20% component ko‘rinsa, true
+        threshold: 0.7, // kamida 20% component ko‘rinsa, true
       }
     );
 
@@ -117,13 +111,17 @@ const ArcSection = () => {
     };
   }, []);
   useEffect(() => {
+    const element = arcRef.current;
+    if (!element) return;
+    const MAX_ROTATION = 180; // max 180 gradus aylansin
+    const ROTATION_SPEED = 0.5; // scrollTop * 0.5 bo‘yicha
+
     const handleScroll = () => {
-      if (!isInView) return;
+      if (!isInView || !element) return;
 
-      const scrollY = window.scrollY;
-      const newRotation = scrollY * 0.5;
+      const scrollTop = element.scrollTop;
+      const newRotation = Math.min(scrollTop * ROTATION_SPEED, MAX_ROTATION);
 
-      // 💡 Faqat activeId ni real vaqt rotation bilan hisoblaymiz
       const top = points
         .map((point) => {
           const angle = point.angle + newRotation;
@@ -134,104 +132,122 @@ const ArcSection = () => {
         .sort((a, b) => a.y - b.y)[0];
 
       setActiveId(top.id);
-      setRotation(newRotation); // Bu faqat `getPosition` uchun kerak
+      setRotation(newRotation);
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    element.addEventListener("scroll", handleScroll);
+    return () => {
+      element.removeEventListener("scroll", handleScroll);
+    };
   }, [isInView]);
+
   const activeFact = universityFacts.find((fact) => fact.id === activeId);
 
   return (
     <div
-      className="max-w-[1480px] h-[800px] mx-auto overflow-hidden  relative"
+      className="overflow-y-scroll [&::-webkit-scrollbar]:hidden scrollbar-none lg:h-screen xl:max-h-[1000px] "
       ref={arcRef}
     >
-      <div className="arcSection h-[300px] w-full absolute bottom-0 z-10"></div>
-      <div className="mt-[120px] mb-[100px]">
-        <h1 className="text-[48px] text-[#2B3767] text-center font-made  uppercase">
-          USAT — bu shunchaki <br /> universitet emas
-        </h1>
-      </div>
-      <div className="w-full flex items-center justify-center">
-        <div className="relative  w-[1380px] h-[1380px] flex items-center justify-center ">
-          <svg width="1380" height="1380" className="absolute inset-0">
-            <circle
-              cx={centerX}
-              cy={centerY}
-              r={radius}
-              fill="none"
-              stroke="rgb(253 224 71)"
-              strokeWidth="3"
-            />
-            {points.map((point) => {
-              const pos = getPosition(point.angle);
-              return (
-                <line
-                  key={`line-${point.id}`}
-                  x1={centerX}
-                  y1={centerY}
-                  x2={pos.x}
-                  y2={pos.y}
-                  strokeWidth="3"
+      <div className="lg:h-[1550px] xl:h-[1500px] relative">
+        <div className="max-w-[1380px] sticky top-0 z-10 h-[800px] mx-auto overflow-hidden ">
+          <div className="arcSection h-[400px] w-full absolute bottom-0 z-20"></div>
+          <div className="mt-[120px] mb-[100px]">
+            <h1 className="text-[48px] text-[#2B3767] text-center font-made  uppercase">
+              USAT — bu shunchaki <br /> universitet emas
+            </h1>
+          </div>
+          <div className="w-full flex items-center justify-center">
+            <div className="relative  w-[1380px] h-[1380px] flex items-center justify-center ">
+              <svg width="1380" height="1380" className="absolute inset-0">
+                <circle
+                  cx={centerX}
+                  cy={centerY}
+                  r={radius}
+                  fill="none"
+                  stroke="rgb(253 224 71)"
+                  strokeWidth="2"
                 />
-              );
-            })}
-          </svg>
+                {points.map((point) => {
+                  const pos = getPosition(point.angle);
+                  return (
+                    <line
+                      key={`line-${point.id}`}
+                      x1={centerX}
+                      y1={centerY}
+                      x2={pos.x}
+                      y2={pos.y}
+                      strokeWidth="3"
+                    />
+                  );
+                })}
+              </svg>
 
-          {points.map((point) => {
-            const pos = getPosition(point.angle);
-            const labelPos = getPosition(point.angle, radius + 80);
+              {points.map((point) => {
+                const pos = getPosition(point.angle);
+                const labelPos = getPosition(point.angle, radius + 80);
 
-            return (
-              <div key={point.id}>
-                <div
-                  className="absolute w-4 h-4 bg-yellow-300 rounded-full transform -translate-x-1/2 -translate-y-1/2"
-                  style={{ left: pos.x, top: pos.y }}
-                />
+                const isActive = point.id === activeId; // 👈 new
 
-                <div
-                  className="absolute w-[80px] h-[80px] bg-white rounded-full border-2 border-[#F4C05B] flex items-center justify-center text-blue-900 font-medium text-[24px] shadow-lg transform -translate-x-1/2 -translate-y-1/2"
-                  style={{ left: labelPos.x, top: labelPos.y }}
-                >
-                  {point.id}
-                </div>
-              </div>
-            );
-          })}
+                return (
+                  <div key={point.id}>
+                    {/* dot */}
+                    <div
+                      className={`absolute w-4 h-4 ${
+                        isActive ? "bg-[#F4C05B] z-20" : "bg-yellow-300 z-10"
+                      } rounded-full transform -translate-x-1/2 -translate-y-1/2`}
+                      style={{ left: pos.x, top: pos.y }}
+                    />
 
-          {/* 🟡 Markazdagi text — faqat activeId asosida chiqadi */}
-          <AnimatePresence mode="wait">
-            {activeFact && (
-              <motion.div
-                key={activeFact.id} // <- albatta unique bo‘lishi kerak
-                className="w-[800px] z-20 absolute top-70 flex justify-center flex-col items-center"
-                initial={{ opacity: 0, x: -100 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 100 }}
-                transition={{ duration: 0.4 }}
-              >
-                <motion.h1
-                  className="text-[40px] text-[#2B3767] text-center font-made uppercase"
-                  initial={{ opacity: 0, x: -100 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 100 }}
-                  transition={{ duration: 0.4 }}
-                >
-                  {activeFact.name}
-                </motion.h1>
-                <motion.p
-                  className="text-[20px] text-[#2B3767] text-center font-medium"
-                  initial={{ opacity: 0, x: -100 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 100 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  {activeFact.desc}
-                </motion.p>
-              </motion.div>
-            )}
-          </AnimatePresence>
+                    {/* label */}
+                    <div
+                      className={`absolute w-[80px] h-[80px] rounded-full border-2 flex items-center justify-center font-medium text-[24px] shadow-lg transform -translate-x-1/2 -translate-y-1/2
+        ${
+          isActive
+            ? "bg-[#F4C05B] text-white z-30 border-[#F4C05B]"
+            : "bg-white text-blue-900 z-10 border-[#F4C05B]"
+        }`}
+                      style={{ left: labelPos.x, top: labelPos.y }}
+                    >
+                      {point.id}
+                    </div>
+                  </div>
+                );
+              })}
+
+              {/* 🟡 Markazdagi text — faqat activeId asosida chiqadi */}
+              <AnimatePresence mode="wait">
+                {activeFact && (
+                  <motion.div
+                    key={activeFact.id} // <- albatta unique bo‘lishi kerak
+                    className="w-[800px] z-20 absolute top-70 flex justify-center flex-col items-center"
+                    initial={{ opacity: 0, x: -100 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 100 }}
+                    transition={{ duration: 0.4 }}
+                  >
+                    <motion.h1
+                      className="text-[40px] text-[#2B3767] text-center font-made uppercase"
+                      initial={{ opacity: 0, x: -100 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: 100 }}
+                      transition={{ duration: 0.4 }}
+                    >
+                      {activeFact.name}
+                    </motion.h1>
+                    <motion.p
+                      className="text-[20px] text-[#2B3767] text-center font-medium"
+                      initial={{ opacity: 0, x: -100 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: 100 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      {activeFact.desc}
+                    </motion.p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </div>
         </div>
       </div>
     </div>
