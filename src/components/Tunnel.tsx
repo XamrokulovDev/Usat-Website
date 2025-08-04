@@ -75,7 +75,7 @@ const Tunnel: React.FC = () => {
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
         <div className="tunnel-perspective absolute inset-0 flex items-center justify-center">
           <div className="absolute top-0 bottom-0 left-0 right-0 z-10 pointer-events-none">
-            <div className="mx-auto w-[1500px] h-full bg-gradient-to-r from-transparent via-white to-transparent" />
+            <div className="mx-auto w-[75vw] h-full bg-gradient-to-r from-transparent via-white to-transparent" />
           </div>
 
           {images.map((src, index) => {
