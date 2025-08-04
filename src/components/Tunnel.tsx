@@ -74,12 +74,16 @@ const Tunnel: React.FC = () => {
       />
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
         <div className="tunnel-perspective absolute inset-0 flex items-center justify-center">
+          <div className="absolute top-0 bottom-0 left-0 right-0 z-10 pointer-events-none">
+            <div className="mx-auto w-[1500px] h-full bg-gradient-to-r from-transparent via-white to-transparent" />
+          </div>
+
           {images.map((src, index) => {
             const z = -index * 300 + progress * 1750;
             return (
               <motion.div
                 key={`left-${index}`}
-                className="absolute w-[200px] h-[180px] overflow-hidden shadow-xl preserve-3d"
+                className="absolute w-[200px] h-[180px] overflow-hidden shadow-xl preserve-3d z-0"
                 style={{
                   transform: `translate3d(-300px, 0, ${z}px) rotateY(90deg)`,
                 }}
@@ -93,7 +97,7 @@ const Tunnel: React.FC = () => {
             return (
               <motion.div
                 key={`right-${index}`}
-                className="absolute w-[200px] h-[180px] overflow-hidden shadow-xl preserve-3d"
+                className="absolute w-[200px] h-[180px] overflow-hidden shadow-xl preserve-3d z-0"
                 style={{
                   transform: `translate3d(300px, 0, ${z}px) rotateY(90deg)`,
                 }}
@@ -103,13 +107,14 @@ const Tunnel: React.FC = () => {
             );
           })}
         </div>
+
         <AnimatePresence>
           {showText && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute w-[656px] flex flex-col gap-[30px] text-center"
+              className="absolute w-[656px] flex flex-col gap-[30px] text-center z-20"
             >
               <h1
                 title="Kelajagingizga hozirdan birinchi qadam qo‘ying"

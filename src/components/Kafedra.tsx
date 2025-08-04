@@ -59,8 +59,7 @@ const Kafedra = () => {
   const item = Kafedras[currentIndex];
 
   return (
-    <div className="w-screen h-[800px] bg-[#00000080] relative overflow-hidden">
-      {/* Background image with fade animation */}
+    <div className="w-[100%] h-[800px] bg-[#00000080] relative overflow-hidden">
       <AnimatePresence mode="wait">
         <motion.img
           key={item.image}
